@@ -8,9 +8,23 @@ const Ready = (props) => {
     getReady();
   }, []);
   const getReady = () => {
-    axios.get(`/api/getData`, {
-      state: "ready",
-      limit: props.maxOrder,
+    axios({
+      url: `/api/getOrder`,
+      method: "get",
+      params: {
+        state: "ready",
+        limit: props.maxOrder,
+      },
+    }).then((res) => {
+      setReadyData(res.data);
+    });
+  };
+  const deleteOrder = (id) => {
+    axios({
+      url: `/api/deleteOrder/${id}`,
+      method: "delete",
+    }).then(() => {
+      getReady();
     });
   };
   return (
@@ -22,8 +36,13 @@ const Ready = (props) => {
         <span className="description">주문하신 제품이 준비되었습니다.</span>
         <div className="number_panel">
           {readyData.map((data, index) => (
-            <div key={index}>
-              <span>{data.number}</span>
+            <div
+              key={index}
+              onClick={() => {
+                deleteOrder(data.id);
+              }}
+            >
+              <span>{data.id}</span>
             </div>
           ))}
         </div>

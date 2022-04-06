@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.scss";
-import Main from "./component/Main";
+import Main from "./pages/Main";
 
 class App extends Component {
   render() {

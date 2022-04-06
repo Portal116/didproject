@@ -8,9 +8,27 @@ const Produce = (props) => {
     getProduce();
   }, []);
   const getProduce = () => {
-    axios.get(`/api/getData`, {
-      state: "produce",
-      limit: props.maxOrder,
+    axios({
+      url: `/api/getOrder`,
+      method: "get",
+      params: {
+        state: "produce",
+        limit: props.maxOrder,
+      },
+    }).then((res) => {
+      setProduceData(res.data);
+    });
+  };
+  const updateProduce = (id) => {
+    axios({
+      url: `/api/updateOrder`,
+      method: "put",
+      params: {
+        id: id,
+        state: "ready",
+      },
+    }).then(() => {
+      getProduce();
     });
   };
   return (
@@ -22,8 +40,13 @@ const Produce = (props) => {
         <span className="description">제품을 준비중 입니다.</span>
         <div className="number_panel">
           {produceData.map((data, index) => (
-            <div key={index}>
-              <span>{data.number}</span>
+            <div
+              key={index}
+              onClick={() => {
+                updateProduce(data.id);
+              }}
+            >
+              <span>{data.id}</span>
             </div>
           ))}
         </div>
