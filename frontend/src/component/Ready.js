@@ -1,23 +1,31 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import "./Ready.scss";
 
 const Ready = (props) => {
+  const [readyData, setReadyData] = useState([]);
+  useEffect(() => {
+    getReady();
+  }, []);
+  const getReady = () => {
+    axios.get(`/api/getData`, {
+      state: "ready",
+      limit: props.maxOrder,
+    });
+  };
   return (
     <div className="container_ready">
-      {props.maxOrder}
-      <div class="name">
+      <div className="name">
         <span>준비완료</span>
       </div>
       <div className="main">
         <span className="description">주문하신 제품이 준비되었습니다.</span>
         <div className="number_panel">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          {readyData.map((data, index) => (
+            <div key={index}>
+              <span>{data.number}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

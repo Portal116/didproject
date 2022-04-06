@@ -51,9 +51,23 @@
                 border-radius: 16px;
                 margin-bottom: 20px;
                 background-color: #e6e6e6;
+                span {
+                    margin: auto;
+                    width: auto;
+                    height: auto;
+                    font-family: S-CoreDream-7;
+                    font-size: 80px;
+                    font-weight: bold;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: 1.31;
+                    letter-spacing: normal;
+                    text-align: left;
+                    color: #000;
+                }
             }
-            :nth-child(2n-1) {
-                margin-right: 18px;
+            :nth-child(2n) {
+                margin-left: 18px;
             }
         }
     }
