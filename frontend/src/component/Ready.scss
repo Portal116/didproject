@@ -1,0 +1,62 @@
+.container_ready {
+    width: 638px;
+    height: 1080px;
+    .name {
+        width: 638px;
+        height: 195px;
+        background-color: #008938;
+        padding: 40px 157px 39px 158px;
+        box-sizing: border-box;
+        span {
+            width: 323px;
+            height: 116px;
+            font-family: S-CoreDream-6;
+            font-size: 84px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #fff;
+        }
+    }
+    .main {
+        padding: 65px 30px 64px 30px;
+        width: 638px;
+        height: 885px;
+        box-sizing: border-box;
+        .description {
+            display: flex;
+            width: 577px;
+            height: 56px;
+            margin: 0 -5px 80px 6px;
+            font-family: S-CoreDream-5;
+            font-size: 40px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.4;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000;
+        }
+        .number_panel {
+            div {
+                float: left;
+                display: flex;
+                width: 280px;
+                height: 135px;
+                border-radius: 16px;
+                margin-bottom: 20px;
+                background-color: #e6e6e6;
+            }
+            :first-child {
+                width: 578px;
+            }
+            :nth-child(2n) {
+                margin-right: 18px;
+            }
+        }
+    }
+}
