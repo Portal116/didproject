@@ -56,10 +56,19 @@ const DID = (props) => {
     });
   };
   const updateOrder = (data) => {
+    let type;
+    if (data.state === "order") {
+      type = "F";
+    } else {
+      type = "L";
+    }
     axios({
       url: `/api/updateOrder`,
       method: "put",
-      data: data,
+      params: {
+        type: type,
+        id: data.id,
+      },
     }).then(() => {
       if (data.state === "produce") {
         props.setModalNum(data.id);
