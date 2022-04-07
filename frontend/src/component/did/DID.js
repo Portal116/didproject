@@ -4,6 +4,7 @@ import "./DID.scss";
 
 const DID = (props) => {
   const [data, setData] = useState([]);
+  const [insert, setInsert] = useState("");
 
   useEffect(() => {
     getOrder(props.type.name);
@@ -21,7 +22,11 @@ const DID = (props) => {
         }
         break;
       case "ready":
-        if (props.changed === "produce" || props.changed === "delete") {
+        if (
+          props.changed === "produce" ||
+          props.changed === "ready" ||
+          props.changed === "delete"
+        ) {
           getOrder(props.type.name);
         }
         break;
@@ -31,9 +36,10 @@ const DID = (props) => {
 
   const insertOrder = () => {
     axios({
-      url: `/api/insertOrder/${1}`,
+      url: `/api/insertOrder/${insert}`,
       method: "post",
     }).then(() => {
+      setInsert("");
       props.setChanged("insert");
     });
   };
@@ -70,6 +76,9 @@ const DID = (props) => {
     });
   };
 
+  const onChangeInsert = (e) => {
+    setInsert(e.target.value);
+  };
   return (
     <div>
       <div className={"container_" + props.type.name}>
@@ -82,6 +91,13 @@ const DID = (props) => {
             >
               {props.type.title}
             </span>
+          )}
+          {props.type.name === "order" && (
+            <input
+              type="number"
+              value={insert}
+              onChange={onChangeInsert}
+            ></input>
           )}
           {props.type.name !== "order" && <span>{props.type.title}</span>}
         </div>

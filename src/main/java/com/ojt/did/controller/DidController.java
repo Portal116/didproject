@@ -28,10 +28,11 @@ public class DidController {
     }
 
     @PutMapping("/updateOrder")
-    public ResponseEntity<?> updateOrder(@RequestBody DidDto didDto) {
-        return didService.updateOrder(didDto);
+    public ResponseEntity<?> updateOrder(@RequestParam("type") String type, @RequestParam("id") long id) {
+        return didService.updateOrder(type, id);
     }
 
+//    테스트용
     @DeleteMapping("/deleteOrder/{id}")
     public ResponseEntity<?> deleteOrder(@PathVariable("id") long id) {
         return didService.deleteOrder(id);

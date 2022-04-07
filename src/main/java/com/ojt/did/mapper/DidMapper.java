@@ -9,8 +9,7 @@ import java.util.List;
 @Mapper
 public interface DidMapper {
 
-    @Insert("insert into did_table(id) values(null)")
-//    @Insert("insert into did_table(id) values(#{id})")
+    @Insert("insert into did_table(id) values(#{id})")
     public int insertOrder(@Param("id") long id);
 
     @Select("select * from did_table where state = #{state} order by modifiedDate desc limit #{limit}")

@@ -22,6 +22,12 @@
             text-align: left;
             color: $color-font-1;
         }
+        input {
+            position: absolute;
+            width: 100px;
+            top: 0;
+            left: 530px;
+        }
     }
     .main {
         padding: 65px 30px 64px 30px;

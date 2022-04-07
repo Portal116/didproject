@@ -36,7 +36,6 @@ public class DidService {
 
     public ResponseEntity<?> getOrder(String state, int limit) {
         try {
-            System.out.println(state + limit);
             List<DidDto> didList = didMapper.findFirstLimitByState(state, limit);
             return new ResponseEntity<>(didList, HttpStatus.OK);
         } catch (Exception e) {
@@ -44,14 +43,29 @@ public class DidService {
         }
     }
 
-    public ResponseEntity<?> updateOrder(DidDto didDto) {
+    public ResponseEntity<?> updateOrder(String type, long id) {
+        Map<String, Object> resMap = new HashMap<>();
         try {
-            if(didDto.getState().equals("order")){
-                didMapper.updateOrder("produce", didDto.getId());
-            } else {
-                didMapper.updateOrder("ready", didDto.getId());
+            DidDto didDto = didMapper.findById(id);
+            resMap.put("beforeState", didDto.getState());
+            switch (type) {
+                case "F":
+                    if (didDto.getState().equals("order")) {
+                        didMapper.updateOrder("produce", id);
+                        resMap.put("afterState", "produce");
+                    }
+                    break;
+                case "L":
+                    if (didDto.getState().equals("produce")) {
+                        didMapper.updateOrder("ready", id);
+                        resMap.put("afterState", "ready");
+                    } else if (didDto.getState().equals("ready")) {
+                        didMapper.deleteOrder(id);
+                        resMap.put("afterState", "delete");
+                    }
+                    break;
             }
-            return new ResponseEntity<>("수정 성공", HttpStatus.OK);
+            return new ResponseEntity<>(resMap, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
