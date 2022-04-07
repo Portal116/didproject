@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./Main.scss";
 import DID from "../../component/did/DID";
 import Modal from "../../component/did/modal/Modal";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const [changed, setChanged] = useState("none");
   const [modalNum, setModalNum] = useState(0);
   const [openSetting, setOpenSetting] = useState("none");
   const [timer, setTimer] = useState(0);
+  const navigate = useNavigate();
+  const moveToSetting = useCallback(
+    () => navigate("/setting", { replace: true }),
+    [navigate]
+  );
   const maxOrder = 8;
   const order = {
     name: "order",
@@ -38,7 +44,7 @@ const Main = () => {
     if (openSetting === "none") {
       setOpenSetting(location);
     } else if (openSetting !== location) {
-      console.log("설정 열기");
+      moveToSetting();
     }
     setTimeout(() => {
       setOpenSetting("none");
