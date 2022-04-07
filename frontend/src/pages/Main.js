@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Main.scss";
 import DID from "../component/did/DID";
+import Modal from "../component/did/modal/Modal";
 
 const Main = () => {
   const [changed, setChanged] = useState("none");
+  const [modalNum, setModalNum] = useState(0);
   const maxOrder = 8;
   const order = {
     name: "order",
@@ -20,8 +22,17 @@ const Main = () => {
     title: "준비완료",
     description: "주문하신 제품이 준비되었습니다.",
   };
+  useEffect(() => {
+    if (modalNum !== 0) {
+      setTimeout(() => {
+        setModalNum(0);
+      }, 2000);
+    }
+  }, [modalNum]);
   return (
     <div className="DID">
+      {modalNum !== 0 && <Modal modalNum={modalNum} />}
+      {/* <Modal modalNum={modalNum} /> */}
       <DID
         maxOrder={maxOrder}
         type={order}
@@ -33,6 +44,7 @@ const Main = () => {
         type={produce}
         setChanged={setChanged}
         changed={changed}
+        setModalNum={setModalNum}
       />
       <DID
         maxOrder={maxOrder - 1}

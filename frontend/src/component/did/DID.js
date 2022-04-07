@@ -76,6 +76,9 @@ const DID = (props) => {
       method: "put",
       data: data,
     }).then(() => {
+      if (data.state === "produce") {
+        props.setModalNum(data.id);
+      }
       props.setChanged(data.state);
     });
   };
