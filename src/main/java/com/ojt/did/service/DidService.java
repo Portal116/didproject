@@ -36,6 +36,7 @@ public class DidService {
 
     public ResponseEntity<?> getOrder(String state, int limit) {
         try {
+//            System.out.println(state + limit);
             List<DidDto> didList = didMapper.findFirstLimitByState(state, limit);
             return new ResponseEntity<>(didList, HttpStatus.OK);
         } catch (Exception e) {

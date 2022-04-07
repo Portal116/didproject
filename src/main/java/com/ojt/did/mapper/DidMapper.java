@@ -13,8 +13,12 @@ public interface DidMapper {
 //    @Insert("insert into did_table(id) values(#{id})")
     public int insertOrder(@Param("id") long id);
 
-    @Select("select * from did_table where state = #{state} order by modifiedDate asc limit #{limit}")
+    @Select("select * from did_table where state = #{state} order by modifiedDate desc limit #{limit}")
     public List<DidDto> findFirstLimitByState(@Param("state") String state, @Param("limit") int limit);
+
+//    @Select("(select * from did_table where state = #{state} order by modifiedDate desc limit 1) " +
+//            "union (select * from did_table where state = #{state} order by modifiedDate asc limit #{limit})")
+//    public List<DidDto> findFirstLimitByState(@Param("state") String state, @Param("limit") int limit);
 
     @Select("select * from did_table")
     public List<DidDto> findAll();
