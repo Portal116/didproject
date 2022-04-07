@@ -3,38 +3,27 @@ import React, { useEffect, useState } from "react";
 import "./DID.scss";
 
 const DID = (props) => {
-  const [orderData, setOrderData] = useState([]);
-  const [produceData, setProduceData] = useState([]);
-  const [readyData, setReadyData] = useState([]);
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    getOrder(props.type.name);
+  }, []);
   useEffect(() => {
     switch (props.type.name) {
       case "order":
-        getOrder("order");
+        if (props.changed === "insert" || props.changed === "order") {
+          getOrder(props.type.name);
+        }
         break;
       case "produce":
-        getOrder("produce");
+        if (props.changed === "order" || props.changed === "produce") {
+          getOrder(props.type.name);
+        }
         break;
       case "ready":
-        getOrder("ready");
-        break;
-    }
-  }, []);
-  useEffect(() => {
-    switch (props.changed) {
-      case "insert":
-        if (props.type.name === "order") getOrder("order");
-        break;
-      case "order":
-        if (props.type.name === "order") getOrder("order");
-        if (props.type.name === "produce") getOrder("produce");
-        break;
-      case "produce":
-        if (props.type.name === "produce") getOrder("produce");
-        if (props.type.name === "ready") getOrder("ready");
-        break;
-      case "delete":
-        if (props.type.name === "ready") getOrder("ready");
+        if (props.changed === "produce" || props.changed === "delete") {
+          getOrder(props.type.name);
+        }
         break;
     }
     props.setChanged("none");
@@ -57,17 +46,7 @@ const DID = (props) => {
         limit: props.maxOrder,
       },
     }).then((res) => {
-      switch (state) {
-        case "order":
-          setOrderData(res.data);
-          break;
-        case "produce":
-          setProduceData(res.data);
-          break;
-        case "ready":
-          setReadyData(res.data);
-          break;
-      }
+      setData(res.data);
     });
   };
   const updateOrder = (data) => {
@@ -108,43 +87,20 @@ const DID = (props) => {
         </div>
         <div className="main">
           <span className="description">{props.type.description}</span>
-          {props.type.name === "order" && (
-            <div className="number_panel">
-              {orderData.map((data, index) => (
-                <div key={index} onClick={() => updateOrder(data)}>
-                  <span>{data.id}</span>
-                </div>
-              ))}
-            </div>
-          )}
-          {props.type.name === "produce" && (
-            <div className="number_panel">
-              {produceData.map((data, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    updateOrder(data);
-                  }}
-                >
-                  <span>{data.id}</span>
-                </div>
-              ))}
-            </div>
-          )}
-          {props.type.name === "ready" && (
-            <div className="number_panel">
-              {readyData.map((data, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    deleteOrder(data.id);
-                  }}
-                >
-                  <span>{data.id}</span>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="number_panel">
+            {data.map((data, index) => (
+              <div
+                key={index}
+                onClick={() =>
+                  props.type.name === "ready"
+                    ? deleteOrder(data.id)
+                    : updateOrder(data)
+                }
+              >
+                <span>{data.id}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

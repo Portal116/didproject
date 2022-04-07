@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Main.scss";
-import DID from "../component/did/DID";
-import Modal from "../component/did/modal/Modal";
+import DID from "../../component/did/DID";
+import Modal from "../../component/did/modal/Modal";
 
 const Main = () => {
   const [changed, setChanged] = useState("none");
   const [modalNum, setModalNum] = useState(0);
+  const [openSetting, setOpenSetting] = useState("none");
+  const [timer, setTimer] = useState(0);
   const maxOrder = 8;
   const order = {
     name: "order",
@@ -24,13 +26,39 @@ const Main = () => {
   };
   useEffect(() => {
     if (modalNum !== 0) {
-      setTimeout(() => {
-        setModalNum(0);
-      }, 2000);
+      clearTimeout(timer);
+      setTimer(
+        setTimeout(() => {
+          setModalNum(0);
+        }, 2000)
+      );
     }
   }, [modalNum]);
+  const showSetting = (location) => {
+    if (openSetting === "none") {
+      setOpenSetting(location);
+    } else if (openSetting !== location) {
+      console.log("설정 열기");
+    }
+    setTimeout(() => {
+      setOpenSetting("none");
+    }, 1000);
+  };
   return (
     <div className="DID">
+      <button
+        className="leftTopBtn"
+        onClick={() => {
+          showSetting("left");
+        }}
+      ></button>
+      <button
+        className="rightTopBtn"
+        onClick={() => {
+          showSetting("right");
+        }}
+      ></button>
+      {/* db ip, db 포트, db 명 = didproject, id = root, pw = 1234 */}
       {modalNum !== 0 && <Modal modalNum={modalNum} />}
       {/* <Modal modalNum={modalNum} /> */}
       <DID

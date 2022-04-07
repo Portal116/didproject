@@ -1,11 +1,12 @@
+@import "../../style/color";
 .container_order {
     width: 638px;
     height: 1080px;
-    border-right: 3px #e6e6e6 solid;
+    border-right: 3px $color-border solid;
     .name {
         width: 638px;
         height: 195px;
-        background-color: #f2b700;
+        background-color: $color-order;
         padding: 40px 157px 39px 158px;
         box-sizing: border-box;
         span {
@@ -19,7 +20,7 @@
             line-height: 1.38;
             letter-spacing: normal;
             text-align: left;
-            color: #000;
+            color: $color-font-1;
         }
     }
     .main {
@@ -40,7 +41,7 @@
             line-height: 1.4;
             letter-spacing: normal;
             text-align: left;
-            color: #000;
+            color: $color-font-1;
         }
         .number_panel {
             div {
@@ -50,7 +51,7 @@
                 height: 135px;
                 border-radius: 16px;
                 margin-bottom: 20px;
-                background-color: #e6e6e6;
+                background-color: $color-border;
                 span {
                     margin: auto;
                     width: auto;
@@ -63,7 +64,7 @@
                     line-height: 1.31;
                     letter-spacing: normal;
                     text-align: left;
-                    color: #000;
+                    color: $color-font-1;
                 }
             }
             :nth-child(2n) {
@@ -75,11 +76,11 @@
 .container_produce {
     width: 638px;
     height: 1080px;
-    border-right: 3px #e6e6e6 solid;
+    border-right: 3px $color-border solid;
     .name {
         width: 638px;
         height: 195px;
-        background-color: #97d700;
+        background-color: $color-produce;
         padding: 40px 198px 39px;
         box-sizing: border-box;
         span {
@@ -93,7 +94,7 @@
             line-height: 1.38;
             letter-spacing: normal;
             text-align: left;
-            color: #000;
+            color: $color-font-1;
         }
     }
     .main {
@@ -114,7 +115,7 @@
             line-height: 1.4;
             letter-spacing: normal;
             text-align: left;
-            color: #000;
+            color: $color-font-1;
         }
         .number_panel {
             div {
@@ -124,7 +125,7 @@
                 height: 135px;
                 border-radius: 16px;
                 margin-bottom: 20px;
-                background-color: #e6e6e6;
+                background-color: $color-border;
                 span {
                     margin: auto;
                     width: auto;
@@ -137,7 +138,7 @@
                     line-height: 1.31;
                     letter-spacing: normal;
                     text-align: left;
-                    color: #000;
+                    color: $color-font-1;
                 }
             }
             :nth-child(2n) {
@@ -152,7 +153,7 @@
     .name {
         width: 638px;
         height: 195px;
-        background-color: #008938;
+        background-color: $color-ready;
         padding: 40px 157px 39px 158px;
         box-sizing: border-box;
         span {
@@ -166,7 +167,7 @@
             line-height: 1.38;
             letter-spacing: normal;
             text-align: left;
-            color: #fff;
+            color: $color-back;
         }
     }
     .main {
@@ -187,7 +188,7 @@
             line-height: 1.4;
             letter-spacing: normal;
             text-align: left;
-            color: #000;
+            color: $color-font-1;
         }
         .number_panel {
             div {
@@ -197,7 +198,7 @@
                 height: 135px;
                 border-radius: 16px;
                 margin-bottom: 20px;
-                background-color: #e6e6e6;
+                background-color: $color-border;
             }
             :nth-child(2n) {
                 margin-right: 18px;
@@ -215,7 +216,7 @@
                     line-height: 1.31;
                     letter-spacing: normal;
                     text-align: left;
-                    color: #000;
+                    color: $color-font-1;
                 }
             }
             :first-child {
@@ -233,7 +234,7 @@
                     line-height: 1.31;
                     letter-spacing: normal;
                     text-align: left;
-                    color: #008938;
+                    color: $color-ready;
                 }
             }
         }
